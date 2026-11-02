@@ -1,26 +1,122 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ============================================
+   Design System LMS "Mulai Usaha dari Nol di Samarinda"
+   Minimalis, bersih, aksen oranye hangat
+   ============================================ */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Light mode */
+  --background: #fafafa;
+  --surface: #ffffff;
+  --border: #e5e7eb;
+  --text: #1c1917;
+  --text-muted: #6b7280;
+  /* Aksen oranye hangat */
+  --accent: #ea580c;
+  --accent-hover: #c2410c;
+  --accent-soft: #fff7ed;
+}
+
+/* Dark mode (class-based, dikontrol toggle) */
+.dark {
+  --background: #0f0f10;
+  --surface: #1c1c1f;
+  --border: #2e2e33;
+  --text: #f3f4f6;
+  --text-muted: #9ca3af;
+  --accent: #f97316;
+  --accent-hover: #fb923c;
+  --accent-soft: #2a1a0f;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not(.light) {
+    --background: #0f0f10;
+    --surface: #1c1c1f;
+    --border: #2e2e33;
+    --text: #f3f4f6;
+    --text-muted: #9ca3af;
+    --accent: #f97316;
+    --accent-hover: #fb923c;
+    --accent-soft: #2a1a0f;
+  }
 }
 
 @theme inline {
   --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-border: var(--border);
+  --color-foreground: var(--text);
+  --color-muted: var(--text-muted);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-soft: var(--accent-soft);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
   background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  color: var(--text);
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+}
+
+/* Utility classes yang sering dipakai */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: #fff;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  font-weight: 500;
+  transition: background 0.15s ease;
+}
+.btn-primary:hover {
+  background: var(--accent-hover);
+}
+.btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  font-weight: 500;
+  transition: background 0.15s ease;
+}
+.btn-secondary:hover {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+}
+
+.input-field {
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  width: 100%;
+  outline: none;
+}
+.input-field:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent) 20%, transparent);
+}
+
+/* Scrollbar halus */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
 }

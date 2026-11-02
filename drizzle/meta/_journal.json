@@ -1,0 +1,27 @@
+{
+  "version": "7",
+  "dialect": "sqlite",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "6",
+      "when": 1793427118999,
+      "tag": "0000_empty_darwin",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1793494691178,
+      "tag": "0001_quiz_submissions_status",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1793503986439,
+      "tag": "0002_quiz_submissions_grading_columns",
+      "breakpoints": true
+    }
+  ]
+}

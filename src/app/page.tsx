@@ -1,69 +1,156 @@
-import Image from "next/image";
+// Halaman landing LMS "Mulai Usaha dari Nol di Samarinda"
+import Link from "next/link";
+import { ThemeToggle } from "@/components/ui/theme-toggle";
 
-export default function Home() {
+export default function HomePage() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+    <div className="flex min-h-screen flex-col bg-background text-foreground">
+      {/* Header Navigasi */}
+      <header className="sticky top-0 z-30 border-b border-border bg-surface/80 backdrop-blur">
+        <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3.5">
+          <div className="flex items-center gap-2">
+            <span className="text-2xl">🚀</span>
+            <div>
+              <h1 className="text-base font-bold leading-tight">
+                Mulai Usaha dari Nol
+              </h1>
+              <p className="text-[11px] text-muted">Samarinda Entrepreneurship LMS</p>
+            </div>
+          </div>
+          <div className="flex items-center gap-3">
+            <ThemeToggle />
+            <Link
+              href="/login"
+              className="btn-secondary text-sm px-3.5 py-1.5"
             >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+              Masuk
+            </Link>
+            <Link
+              href="/register"
+              className="btn-primary text-sm px-3.5 py-1.5"
             >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+              Daftar Gratis
+            </Link>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      </header>
+
+      {/* Hero Section */}
+      <main className="flex flex-1 flex-col items-center justify-center px-4 py-16 sm:py-24 text-center">
+        <div className="max-w-3xl">
+          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-accent/20 bg-accent-soft px-4 py-1.5 text-xs font-semibold text-accent">
+            <span>✨</span>
+            <span>Platform Pembelajaran Wirausaha Samarinda Terpadu</span>
+          </div>
+
+          <h2 className="mb-5 text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
+            Bangun Bisnis Impianmu
+            <br />
+            <span className="text-accent">dari Nol di Kota Samarinda</span>
+          </h2>
+
+          <p className="mb-8 text-base text-muted sm:text-lg max-w-2xl mx-auto">
+            Pelajari riset pasar lokal di Citra Niaga & Tepian Mahakam, legalitas NIB & OSS, video materi terarah, ujian interaktif, hingga konsultasi pintar bersama Miss Celine AI.
+          </p>
+
+          <div className="flex flex-wrap justify-center gap-3 sm:gap-4">
+            <Link href="/register" className="btn-primary px-7 py-3 text-base shadow-sm">
+              Mulai Belajar Sekarang →
+            </Link>
+            <Link href="/login" className="btn-secondary px-6 py-3 text-base">
+              Masuk ke Kelas
+            </Link>
+          </div>
+
+          {/* Profil Akun Demo Cepat */}
+          <div className="mt-8 rounded-lg border border-border bg-surface p-3 text-xs text-muted max-w-md mx-auto">
+            <p className="font-semibold text-foreground mb-1">Akun Akses Uji Coba (Demo):</p>
+            <div className="flex justify-around text-left">
+              <div>
+                <p className="text-[11px] font-medium text-foreground">Siswa:</p>
+                <p>siswa@lms.com</p>
+                <p className="text-muted/70">siswa123</p>
+              </div>
+              <div>
+                <p className="text-[11px] font-medium text-foreground">Instruktur:</p>
+                <p>instruktur@lms.com</p>
+                <p className="text-muted/70">instruktur123</p>
+              </div>
+              <div>
+                <p className="text-[11px] font-medium text-foreground">Admin:</p>
+                <p>admin@lms.com</p>
+                <p className="text-muted/70">admin123</p>
+              </div>
+            </div>
+          </div>
         </div>
       </main>
+
+      {/* Fitur Utama */}
+      <section className="border-t border-border bg-surface/50 py-16">
+        <div className="mx-auto max-w-6xl px-4">
+          <div className="text-center mb-12">
+            <h3 className="text-2xl font-bold tracking-tight">Semua yang Anda Butuhkan untuk Sukses</h3>
+            <p className="text-sm text-muted mt-2">Didesain khusus untuk karakter pasar dan ekosistem bisnis di Kalimantan Timur</p>
+          </div>
+
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {[
+              {
+                icon: "📚",
+                title: "Materi Kurikulum Lokal",
+                desc: "Panduan PDF dan modul bacaan bisnis kuliner, jasa, hingga perizinan legalitas UMKM Kota Samarinda.",
+              },
+              {
+                icon: "🎥",
+                title: "Video Streaming Terarah",
+                desc: "Pemutar video native dengan pelacakan progres belajar otomatis (HTTP Range video streaming).",
+              },
+              {
+                icon: "📝",
+                title: "Ujian & Sertifikasi Resmi",
+                desc: "Ujian pilihan ganda & essay berwaktu, penilaian otomatis, dan sertifikat ber-ID verifikasi PDF resmi.",
+              },
+              {
+                icon: "🤖",
+                title: "Konsultan AI 'Miss Celine'",
+                desc: "Asisten AI streaming ramah yang paham seluk-beluk tren konsumen dan perizinan usaha di Samarinda.",
+              },
+              {
+                icon: "💬",
+                title: "Forum Diskusi & Komunitas",
+                desc: "Wadah tanya-jawab interaktif antar siswa dan instruktur dengan notifikasi in-app instan.",
+              },
+              {
+                icon: "🏅",
+                title: "Jadwal Belajar & Leaderboard",
+                desc: "Atur target belajar mandiri dan raih poin gamifikasi berdasarkan kelulusan ujian dan materi.",
+              },
+            ].map((f) => (
+              <div key={f.title} className="card p-6 transition-all hover:border-accent/40 hover:shadow-sm">
+                <div className="mb-3 text-3xl">{f.icon}</div>
+                <h4 className="mb-2 text-base font-semibold">{f.title}</h4>
+                <p className="text-sm text-muted leading-relaxed">{f.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="border-t border-border bg-surface py-8">
+        <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-4 text-center sm:flex-row sm:text-left">
+          <div className="flex items-center gap-2">
+            <span className="text-xl">🚀</span>
+            <p className="text-xs text-muted">
+              © 2026 <strong>Mulai Usaha dari Nol di Samarinda</strong>. Seluruh hak cipta dilindungi.
+            </p>
+          </div>
+          <div className="flex items-center gap-4 text-xs text-muted">
+            <span>Dibuat dengan Next.js App Router, SQLite, dan Drizzle ORM</span>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
