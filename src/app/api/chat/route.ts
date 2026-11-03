@@ -1,4 +1,4 @@
-// Endpoint API Chatbot AI Miss Celine (/api/chat)
+// Endpoint API Chatbot AI Litani (/api/chat)
 // Mendukung Server-Sent Events (SSE) streaming & respons JSON standar
 
 import { NextRequest, NextResponse } from "next/server";
@@ -135,7 +135,7 @@ export async function POST(req: NextRequest) {
         // Mode lokal / fallback jika API key belum disetel
         const lastUserText = lastMsg.content;
         const answer = generateLocalFallbackAnswer(lastUserText, lmsContext, userName);
-        const disclaimer = "\n\n---\n*💡 Catatan: Menjawab via basis pengetahuan lokal Miss Celine (Mode Standar).*";
+        const disclaimer = "\n\n---\n*💡 Catatan: Menjawab via basis pengetahuan lokal Litani (Mode Standar).*";
         const fullAnswer = answer + disclaimer;
 
         // Pecah teks menjadi token/potongan kecil untuk efek ketikan mengalir

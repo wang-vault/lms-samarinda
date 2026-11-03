@@ -75,7 +75,7 @@ export default async function SiswaDashboardPage() {
           <div>
             <h3 className="font-semibold text-foreground">Butuh Konsultasi Ide Usaha?</h3>
             <p className="text-xs text-muted">
-              Tanyakan ide bisnis, riset pasar Samarinda, atau perizinan UMKM ke Miss Celine.
+              Tanyakan ide bisnis, riset pasar Samarinda, atau perizinan UMKM ke Litani.
             </p>
           </div>
         </div>
@@ -83,7 +83,7 @@ export default async function SiswaDashboardPage() {
           href="/siswa/chat"
           className="btn-primary text-xs shrink-0 inline-flex items-center gap-1.5"
         >
-          <span>💬</span> Tanya Miss Celine
+          <span>💬</span> Tanya Litani
         </Link>
       </div>
     </>
