@@ -42,7 +42,7 @@ next-env.d.ts
 
 # Environment
 .env
-data/
+/data/
 
 .dev.log
 nul

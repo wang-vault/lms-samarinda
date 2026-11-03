@@ -5,7 +5,7 @@ const path = require("path");
 const db = new D("./data/lms.db");
 
 // Folder upload (path relatif terhadap root proyek)
-const MATERI_DIR = path.join("data", "uploads", "materi");
+const MATERI_DIR = path.join("data", "uploads", "materials");
 const VIDEO_DIR = path.join("data", "uploads", "videos");
 
 let filesRemoved = 0;
