@@ -60,7 +60,7 @@ export default function HomePage() {
           </h2>
 
           <p className="mb-8 text-base text-muted sm:text-lg max-w-2xl mx-auto">
-            Pelajari riset pasar lokal di Citra Niaga & Tepian Mahakam, legalitas NIB & OSS, video materi terarah, ujian interaktif, hingga konsultasi pintar bersama Litani AI.
+            Pelajari riset pasar lokal di Citra Niaga & Tepian Mahakam, legalitas NIB & OSS, video materi terarah, ujian interaktif, hingga konsultasi pintar bersama Bizzy AI.
           </p>
 
           <div className="flex flex-wrap justify-center gap-3 sm:gap-4">
@@ -123,7 +123,7 @@ export default function HomePage() {
               },
               {
                 icon: <Bot className="h-6 w-6" aria-hidden="true" />,
-                title: "Konsultan AI 'Litani'",
+                title: "Konsultan AI 'Bizzy'",
                 desc: "Asisten AI streaming ramah yang paham seluk-beluk tren konsumen dan perizinan usaha di Samarinda.",
               },
               {

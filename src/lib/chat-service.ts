@@ -1,4 +1,4 @@
-// Layanan Chatbot AI "Litani" untuk LMS Mulai Usaha dari Nol di Samarinda
+// Layanan Chatbot AI "Bizzy" untuk LMS Mulai Usaha dari Nol di Samarinda
 // Menggunakan @anthropic-ai/sdk dengan fallback cerdas berbasis pengetahuan lokal
 
 import Anthropic from "@anthropic-ai/sdk";
@@ -83,14 +83,14 @@ export async function getLmsKnowledgeSummary(): Promise<string> {
   }
 }
 
-/** Bangun system prompt untuk Litani */
+/** Bangun system prompt untuk Bizzy */
 export function buildSystemPrompt(
   lmsContext: string,
   userName?: string
 ): string {
   const greeting = userName ? `Siswa yang sedang Anda ajak bicara bernama "${userName}".` : "";
 
-  return `Anda adalah "Litani", asisten AI konsultan wirausaha ramah, sabar, dan penuh semangat untuk platform pembelajaran online "Mulai Usaha dari Nol di Samarinda".
+  return `Anda adalah "Bizzy", asisten AI konsultan wirausaha ramah, sabar, dan penuh semangat untuk platform pembelajaran online "Mulai Usaha dari Nol di Samarinda".
 ${greeting}
 
 Misi utama Anda:
@@ -214,7 +214,7 @@ Kabar baiknya: Sekarang mengurus izin usaha mikro **100% GRATIS dan ONLINE**!
 - Untuk pelaku usaha mikro dengan proses produk halal sederhana (self-declare).
 - Daftarkan melalui portal **ptsp.halal.go.id** (BPJPH).
 
-*Tips Litani:* Jangan menunggu izin lengkap baru mulai jualan. Urus NIB sekarang sambil mulai tes pasar produkmu secara kecil-kecilan!`;
+*Tips Bizzy:* Jangan menunggu izin lengkap baru mulai jualan. Urus NIB sekarang sambil mulai tes pasar produkmu secara kecil-kecilan!`;
   }
 
   // 3. Pertanyaan seputar modal, dana, atau keuangan
@@ -298,14 +298,14 @@ Konsistensi memposting setiap hari jam 11.00 siang (sebelum makan siang) dan jam
   }
 
   // 6. Respon umum ramah dan memotivasi
-  return `${nameGreeting}Saya Litani, asisten konsultan wirausahamu di Samarinda!
+  return `${nameGreeting}Saya Bizzy, asisten konsultan wirausahamu di Samarinda!
 
 Pertanyaan yang bagus sekali. Dalam merintis usaha dari nol di Samarinda, ada tiga pilar utama yang perlu kita pegang:
 1. **Validasi Masalah & Kebutuhan:** Pastikan produk/jasa yang kita tawarkan benar-benar memecahkan masalah atau disukai oleh masyarakat Samarinda.
 2. **Mulai dari Skala Kecil:** Jangan terburu-buru menyewa ruko atau membeli alat mahal. Uji respons pasar dulu dengan modal seminimal mungkin.
 3. **Disiplin Eksekusi:** Catat transaksi, jaga kualitas rasa/pelayanan, dan terus dengarkan masukan pelanggan.
 
-Kira-kira produk atau ide usaha apa yang sedang ingin kamu kembangkan saat ini? Ceritakan ke Litani, yuk kita susun strategi konkritnya bersama!`;
+Kira-kira produk atau ide usaha apa yang sedang ingin kamu kembangkan saat ini? Ceritakan ke Bizzy, yuk kita susun strategi konkritnya bersama!`;
 }
 
 /**
@@ -332,13 +332,15 @@ export async function getChatCompletion({
     const lastUserMessage =
       [...sanitized].reverse().find((m) => m.role === "user")?.content || "";
     const base = generateLocalFallbackAnswer(lastUserMessage, lmsContext, userName);
-    return `${base}\n\n---\n*Catatan: Menjawab via basis pengetahuan lokal Litani (Mode Standar).*`;
+    return `${base}\n\n---\n*Catatan: Menjawab via basis pengetahuan lokal Bizzy (Mode Standar).*`;
   }
 
   // Panggil Anthropic API
   const client = new Anthropic({
     apiKey,
     baseURL: process.env.ANTHROPIC_BASE_URL || undefined,
+    timeout: 5000,
+    maxRetries: 1,
   });
 
   const model = process.env.ANTHROPIC_MODEL || "claude-opus-5-5";
@@ -358,9 +360,13 @@ export async function getChatCompletion({
         fullText += block.text;
       }
     }
-    return sanitizeAIOutput(fullText);
+    const cleaned = sanitizeAIOutput(fullText);
+    if (!cleaned || cleaned.trim().length === 0) {
+      throw new Error("Respons teks kosong dari model upstream.");
+    }
+    return cleaned;
   } catch {
-    // Tangani error API (misal kuota habis atau invalid key) dengan fallback aman
+    // Tangani error API (misal kuota habis, timeout, proxy down, atau respons kosong) dengan fallback aman
     const lastUserMessage =
       [...sanitized].reverse().find((m) => m.role === "user")?.content || "";
     const base = generateLocalFallbackAnswer(lastUserMessage, lmsContext, userName);

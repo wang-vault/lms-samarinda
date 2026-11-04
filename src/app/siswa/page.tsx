@@ -92,7 +92,7 @@ export default async function SiswaDashboardPage() {
           <div>
             <h3 className="font-semibold text-foreground">Butuh Konsultasi Ide Usaha?</h3>
             <p className="text-xs text-muted">
-              Tanyakan ide bisnis, riset pasar Samarinda, atau perizinan UMKM ke Litani.
+              Tanyakan ide bisnis, riset pasar Samarinda, atau perizinan UMKM ke Bizzy.
             </p>
           </div>
         </div>
@@ -101,7 +101,7 @@ export default async function SiswaDashboardPage() {
           className="btn-primary text-xs shrink-0 inline-flex items-center gap-1.5"
         >
           <MessageSquare className="h-4 w-4" aria-hidden="true" />
-          <span>Tanya Litani</span>
+          <span>Tanya Bizzy</span>
         </Link>
       </div>
     </>

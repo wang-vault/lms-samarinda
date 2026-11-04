@@ -1,4 +1,4 @@
-// Test E2E Tahap 7 — Chatbot AI "Litani"
+// Test E2E Tahap 7 — Chatbot AI "Bizzy"
 // Verifikasi alur lengkap:
 // 1. Proteksi akses: request unauthenticated ke /api/chat ditolak 401.
 // 2. Validasi input: payload kosong / format salah ditolak 400.
@@ -6,7 +6,7 @@
 // 4. Request streaming SSE mengembalikan header text/event-stream & event chunks + [DONE].
 // 5. Multi-turn conversation: context percakapan sebelumnya dipertahankan.
 // 6. Pengetahuan kontekstual: saran wirausaha Samarinda (kuliner, NIB, modal).
-// 7. Render halaman: /siswa/chat render 200 OK dengan elemen antarmuka Litani.
+// 7. Render halaman: /siswa/chat render 200 OK dengan elemen antarmuka Bizzy.
 // 8. Integrasi navigasi: link "Tanya AI" ada di menu /siswa dan banner di dashboard.
 // 9. Tamu (guest) yang membuka /siswa/chat diredirect ke /login (307/302).
 
@@ -59,7 +59,7 @@ function check(label, condition, detail = "") {
 }
 
 async function main() {
-  console.log("=== PENGUJIAN TAHAP 7: CHATBOT AI 'LITANI' ===\n");
+  console.log("=== PENGUJIAN TAHAP 7: CHATBOT AI 'BIZZY' ===\n");
 
   // ============================================
   // 1. UJI PROTEKSI AKSES /api/chat (Tamu / Guest)
@@ -71,7 +71,7 @@ async function main() {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      messages: [{ role: "user", content: "Halo Litani" }],
+      messages: [{ role: "user", content: "Halo Bizzy" }],
     }),
   });
   check(
@@ -298,14 +298,14 @@ async function main() {
 
   const html = await pageRes.text();
   check(
-    "Halaman memuat judul 'Tanya Litani'",
-    html.includes("Tanya Litani"),
+    "Halaman memuat judul 'Tanya Bizzy'",
+    html.includes("Tanya Bizzy"),
     "Judul halaman terdeteksi"
   );
   check(
     "Halaman memuat badge 'AI Wirausaha'",
-    html.includes("AI Wirausaha") || html.includes("Litani"),
-    "Badge / identitas Litani terdeteksi"
+    html.includes("AI Wirausaha") || html.includes("Bizzy"),
+    "Badge / identitas Bizzy terdeteksi"
   );
   check(
     "Halaman memuat form input pertanyaan",
@@ -331,8 +331,8 @@ async function main() {
     "Menu 'Tanya AI' terpasang di sidebar"
   );
   check(
-    "Dashboard siswa memiliki banner konsultasi 'Tanya Litani'",
-    dashHtml.includes("Tanya Litani") && dashHtml.includes("Butuh Konsultasi"),
+    "Dashboard siswa memiliki banner konsultasi 'Tanya Bizzy'",
+    dashHtml.includes("Tanya Bizzy") && dashHtml.includes("Butuh Konsultasi"),
     "Banner konsultasi terpasang di dashboard"
   );
 

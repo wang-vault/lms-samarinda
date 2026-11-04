@@ -1,6 +1,6 @@
 "use client";
 
-// Antarmuka obrolan interaktif dengan Litani (Asisten AI Wirausaha Samarinda)
+// Antarmuka obrolan interaktif dengan Bizzy (Asisten AI Wirausaha Samarinda)
 // Mendukung streaming teks SSE secara realtime, saran pertanyaan, & riwayat obrolan
 
 import { useState, useEffect, useRef } from "react";
@@ -20,7 +20,7 @@ import {
   Send,
 } from "lucide-react";
 
-const LOCAL_STORAGE_KEY = "lms_litani_chat_v1";
+const LOCAL_STORAGE_KEY = "lms_bizzy_chat_v1";
 
 // Pertanyaan pancingan awal seputar wirausaha di Samarinda
 const QUICK_PROMPTS = [
@@ -379,7 +379,7 @@ export function ChatInterface({ userName }: { userName: string }) {
   // Hapus semua riwayat
   const handleClearHistory = () => {
     if (messages.length === 0) return;
-    if (confirm("Hapus seluruh riwayat percakapan dengan Litani?")) {
+    if (confirm("Hapus seluruh riwayat percakapan dengan Bizzy?")) {
       handleStopGenerating();
       setMessages([]);
       localStorage.removeItem(LOCAL_STORAGE_KEY);
@@ -416,7 +416,7 @@ export function ChatInterface({ userName }: { userName: string }) {
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <h2 className="text-sm font-bold text-foreground">Litani</h2>
+              <h2 className="text-sm font-bold text-foreground">Bizzy</h2>
               <span className="rounded-full bg-accent-soft px-2 py-0.5 text-[10px] font-semibold text-accent">
                 AI Wirausaha
               </span>
@@ -452,7 +452,7 @@ export function ChatInterface({ userName }: { userName: string }) {
               Halo, {userName}! Siap mulai usahamu dari nol?
             </h3>
             <p className="mt-1 text-sm text-muted">
-              Saya Litani, asisten AI yang siap membantumu mencari ide,
+              Saya Bizzy, asisten AI yang siap membantumu mencari ide,
               meriset pasar lokal Samarinda, mengurus legalitas, hingga strategi
               pemasaran modal kecil.
             </p>
@@ -532,7 +532,7 @@ export function ChatInterface({ userName }: { userName: string }) {
                     ) : (
                       <div className="flex items-center gap-1.5 py-1 text-muted">
                         <span className="h-2 w-2 rounded-full bg-accent animate-ping" />
-                        <span className="text-xs">Litani sedang mengetik...</span>
+                        <span className="text-xs">Bizzy sedang mengetik...</span>
                       </div>
                     )}
                   </div>
@@ -541,7 +541,7 @@ export function ChatInterface({ userName }: { userName: string }) {
                 {/* Tombol Salin untuk Pesan Asisten */}
                 {!isUser && msg.content && (
                   <div className="mt-2 pt-2 border-t border-border/50 flex items-center justify-between text-[11px] text-muted">
-                    <span>Litani</span>
+                    <span>Bizzy</span>
                     <button
                       type="button"
                       onClick={() => handleCopy(msg.content, index)}
@@ -638,7 +638,7 @@ export function ChatInterface({ userName }: { userName: string }) {
         </form>
 
         <p className="mt-2 text-center text-[11px] text-muted">
-          Litani dirancang untuk membimbing ide usahamu. Selalu konfirmasi
+          Bizzy dirancang untuk membimbing ide usahamu. Selalu konfirmasi
           syarat legalitas resmi ke instansi terkait di Samarinda.
         </p>
       </div>
