@@ -10,6 +10,7 @@ import { requireRole } from "@/lib/auth-helpers";
 import { PageHeader } from "@/components/layout/page-header";
 import { VideoPlayer } from "@/components/siswa/video-player";
 import { formatDuration } from "@/lib/file-storage";
+import { Video, CheckCircle2 } from "lucide-react";
 
 export default async function SiswaVideoWatchPage({
   params,
@@ -66,7 +67,7 @@ export default async function SiswaVideoWatchPage({
 
       {rows.length === 0 ? (
         <div className="card p-10 text-center">
-          <div className="mb-3 text-4xl">🎥</div>
+          <Video className="mx-auto mb-3 h-10 w-10 text-muted/60" aria-hidden="true" />
           <h3 className="mb-1 font-semibold">Belum ada video di kursus ini</h3>
           <p className="text-sm text-muted">
             Instruktur belum menambahkan video untuk kursus ini.
@@ -80,9 +81,13 @@ export default async function SiswaVideoWatchPage({
                 <h2 className="font-semibold">
                   <span className="text-muted">{i + 1}.</span> {v.title}
                 </h2>
-                <span className="text-xs text-muted">
-                  {formatDuration(v.durationSeconds)}
-                  {v.watched ? " · ✅ Selesai" : ""}
+                <span className="inline-flex items-center gap-1.5 text-xs text-muted">
+                  <span>{formatDuration(v.durationSeconds)}</span>
+                  {v.watched && (
+                    <span className="inline-flex items-center gap-1 font-medium text-green-600 dark:text-green-400">
+                      · <CheckCircle2 className="h-3.5 w-3.5" aria-hidden="true" /> Selesai
+                    </span>
+                  )}
                 </span>
               </div>
               {v.description && (

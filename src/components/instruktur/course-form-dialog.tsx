@@ -8,6 +8,7 @@ import {
   updateCourseAction,
   type ActionState,
 } from "@/actions/materials";
+import { Pencil, Plus } from "lucide-react";
 
 type CourseData = {
   id: string;
@@ -36,9 +37,22 @@ export function CourseFormDialog({
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className={mode === "create" ? "btn-primary text-sm" : "btn-secondary text-sm"}
+        aria-label={mode === "create" ? "Buat Kursus" : "Edit Kursus"}
+        title={mode === "create" ? "Buat Kursus" : "Edit Kursus"}
+        className={
+          mode === "create"
+            ? "btn-primary inline-flex items-center gap-1.5 text-sm"
+            : "btn-secondary inline-flex items-center justify-center p-2 text-sm"
+        }
       >
-        {mode === "create" ? "+ Buat Kursus" : "✎"}
+        {mode === "create" ? (
+          <>
+            <Plus className="h-4 w-4" aria-hidden="true" />
+            <span>Buat Kursus</span>
+          </>
+        ) : (
+          <Pencil className="h-4 w-4" aria-hidden="true" />
+        )}
       </button>
 
       {open && (

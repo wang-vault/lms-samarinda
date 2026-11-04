@@ -3,6 +3,14 @@
 import { requireRole } from "@/lib/auth-helpers";
 import { PageHeader } from "@/components/layout/page-header";
 import { getStudentLeaderboard } from "@/lib/support-queries";
+import {
+  Trophy,
+  Lightbulb,
+  Award,
+  BarChart3,
+  Video,
+  Medal,
+} from "lucide-react";
 
 export const metadata = {
   title: "Papan Peringkat · Siswa",
@@ -22,15 +30,27 @@ export default async function SiswaLeaderboardPage() {
 
       {/* Info Aturan Poin */}
       <div className="card p-4 bg-accent-soft/30 border-accent/30 flex flex-wrap items-center justify-between gap-3 text-xs text-muted">
-        <span className="font-semibold text-foreground">💡 Aturan Poin:</span>
-        <span>🏆 Sertifikat Lulus = +100 Poin</span>
-        <span>📊 Rata-rata Nilai Ujian = +Skor</span>
-        <span>🎥 Video Selesai Ditonton = +10 Poin</span>
+        <span className="inline-flex items-center gap-1.5 font-semibold text-foreground">
+          <Lightbulb className="h-4 w-4 text-accent" aria-hidden="true" />
+          <span>Aturan Poin:</span>
+        </span>
+        <span className="inline-flex items-center gap-1">
+          <Award className="h-3.5 w-3.5 text-accent" aria-hidden="true" />
+          <span>Sertifikat Lulus = +100 Poin</span>
+        </span>
+        <span className="inline-flex items-center gap-1">
+          <BarChart3 className="h-3.5 w-3.5 text-accent" aria-hidden="true" />
+          <span>Rata-rata Nilai Ujian = +Skor</span>
+        </span>
+        <span className="inline-flex items-center gap-1">
+          <Video className="h-3.5 w-3.5 text-accent" aria-hidden="true" />
+          <span>Video Selesai Ditonton = +10 Poin</span>
+        </span>
       </div>
 
       {leaderboard.length === 0 ? (
         <div className="card p-8 text-center text-muted">
-          <span className="text-3xl block mb-2">🏅</span>
+          <Trophy className="mx-auto mb-2 h-10 w-10 text-muted/60" aria-hidden="true" />
           <p className="text-sm font-semibold text-foreground">
             Belum ada data siswa di papan peringkat.
           </p>
@@ -53,14 +73,6 @@ export default async function SiswaLeaderboardPage() {
               <tbody className="divide-y divide-border">
                 {leaderboard.map((item) => {
                   const isCurrent = item.userId === currentUser.id;
-                  const rankBadge =
-                    item.rank === 1
-                      ? "🥇"
-                      : item.rank === 2
-                      ? "🥈"
-                      : item.rank === 3
-                      ? "🥉"
-                      : `#${item.rank}`;
 
                   return (
                     <tr
@@ -72,7 +84,21 @@ export default async function SiswaLeaderboardPage() {
                       }`}
                     >
                       <td className="px-4 py-3 text-center text-base">
-                        {rankBadge}
+                        {item.rank === 1 ? (
+                          <span className="inline-flex items-center justify-center text-amber-500 font-bold" title="Juara 1">
+                            <Medal className="h-5 w-5" aria-hidden="true" />
+                          </span>
+                        ) : item.rank === 2 ? (
+                          <span className="inline-flex items-center justify-center text-slate-400 font-bold" title="Juara 2">
+                            <Medal className="h-5 w-5" aria-hidden="true" />
+                          </span>
+                        ) : item.rank === 3 ? (
+                          <span className="inline-flex items-center justify-center text-amber-700 dark:text-amber-600 font-bold" title="Juara 3">
+                            <Medal className="h-5 w-5" aria-hidden="true" />
+                          </span>
+                        ) : (
+                          <span className="text-xs text-muted font-medium">#{item.rank}</span>
+                        )}
                       </td>
                       <td className="px-4 py-3">
                         <div className="flex items-center gap-2">
@@ -92,8 +118,9 @@ export default async function SiswaLeaderboardPage() {
                         </div>
                       </td>
                       <td className="px-4 py-3 text-center">
-                        <span className="rounded bg-border px-2 py-0.5 text-xs font-semibold">
-                          🏆 {item.totalCertificates}
+                        <span className="inline-flex items-center gap-1 rounded bg-border px-2 py-0.5 text-xs font-semibold">
+                          <Award className="h-3 w-3 text-accent" aria-hidden="true" />
+                          <span>{item.totalCertificates}</span>
                         </span>
                       </td>
                       <td className="px-4 py-3 text-center text-xs">

@@ -6,6 +6,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import { Rocket, LogOut, Menu, Bell } from "lucide-react";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { logoutAction } from "@/actions/auth";
 import type { UserRole } from "@/db/schema";
@@ -13,7 +14,7 @@ import type { UserRole } from "@/db/schema";
 export type NavItem = {
   href: string;
   label: string;
-  icon: string;
+  icon: React.ReactNode;
   /** true = menu belum tersedia (masih tahap berikutnya) */
   soon?: boolean;
 };
@@ -42,7 +43,7 @@ export function DashboardShell({
         className="flex items-center gap-2 px-4 py-5"
         onClick={() => setOpen(false)}
       >
-        <span className="text-xl">🚀</span>
+        <Rocket className="h-5 w-5 text-accent shrink-0" aria-hidden="true" />
         <div>
           <p className="text-sm font-bold leading-tight">Mulai Usaha</p>
           <p className="text-[11px] text-muted">dari Nol · Samarinda</p>
@@ -64,7 +65,7 @@ export function DashboardShell({
                 className={`${common} cursor-not-allowed text-muted/50`}
                 title="Segera hadir"
               >
-                <span className="text-base opacity-60">{item.icon}</span>
+                <span className="shrink-0 opacity-60">{item.icon}</span>
                 {item.label}
                 <span className="ml-auto rounded bg-border px-1.5 py-0.5 text-[10px] uppercase">
                   Soon
@@ -84,7 +85,7 @@ export function DashboardShell({
                   : "text-muted hover:bg-accent-soft hover:text-foreground"
               }`}
             >
-              <span className="text-base">{item.icon}</span>
+              <span className="shrink-0">{item.icon}</span>
               {item.label}
             </Link>
           );
@@ -97,7 +98,7 @@ export function DashboardShell({
             type="submit"
             className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm text-muted transition-colors hover:bg-accent-soft hover:text-foreground"
           >
-            <span>🚪</span> Keluar
+            <LogOut className="h-4 w-4 shrink-0" aria-hidden="true" /> Keluar
           </button>
         </form>
       </div>
@@ -131,10 +132,11 @@ export function DashboardShell({
             <button
               type="button"
               onClick={() => setOpen(true)}
-              className="rounded-lg border border-border px-2.5 py-1.5 text-sm md:hidden"
-              aria-label="Buka menu"
+              className="flex h-9 w-9 items-center justify-center rounded-lg border border-border text-muted transition-colors hover:border-accent hover:text-accent md:hidden"
+              aria-label="Buka menu navigasi"
+              title="Buka menu"
             >
-              ☰
+              <Menu className="h-5 w-5" aria-hidden="true" />
             </button>
             <Link
               href={`/${role}/profil`}
@@ -155,10 +157,11 @@ export function DashboardShell({
             {/* Tautan Notifikasi Cepat di Header */}
             <Link
               href={`/${role}/notifikasi`}
-              className="relative rounded-lg border border-border p-2 text-sm text-muted hover:border-accent hover:text-accent transition-colors"
+              className="flex h-9 w-9 items-center justify-center rounded-lg border border-border text-muted hover:border-accent hover:text-accent transition-colors"
               title="Pusat Notifikasi"
+              aria-label="Pusat Notifikasi"
             >
-              <span>🔔</span>
+              <Bell className="h-4 w-4" aria-hidden="true" />
             </Link>
 
             <ThemeToggle />

@@ -7,6 +7,7 @@ import { requireRole } from "@/lib/auth-helpers";
 import { PageHeader } from "@/components/layout/page-header";
 import { QuizFormDialog } from "@/components/instruktur/quiz-form-dialog";
 import { DeleteQuizButton } from "@/components/instruktur/delete-quiz-button";
+import { ClipboardList, BookOpen } from "lucide-react";
 
 export default async function InstrukturQuizPage() {
   const user = await requireRole("instruktur");
@@ -78,7 +79,7 @@ export default async function InstrukturQuizPage() {
 
       {myQuizzes.length === 0 ? (
         <div className="card p-10 text-center">
-          <div className="mb-3 text-4xl">📝</div>
+          <ClipboardList className="mx-auto mb-3 h-10 w-10 text-muted/60" aria-hidden="true" />
           <h3 className="mb-1 font-semibold">Belum ada quiz</h3>
           <p className="mb-4 text-sm text-muted">
             {myCourses.length === 0
@@ -94,7 +95,8 @@ export default async function InstrukturQuizPage() {
           {[...quizzesByCourse.entries()].map(([courseTitle, items]) => (
             <section key={courseTitle}>
               <h2 className="mb-3 flex items-center gap-2 font-semibold">
-                <span>📚</span> {courseTitle}
+                <BookOpen className="h-5 w-5 text-accent" aria-hidden="true" />
+                <span>{courseTitle}</span>
               </h2>
               <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 {items.map((q) => {

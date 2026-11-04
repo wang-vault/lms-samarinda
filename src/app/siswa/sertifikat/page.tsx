@@ -8,6 +8,7 @@ import {
   getStudentCertificates,
   formatIssueDate,
 } from "@/lib/certificate-lib";
+import { Award } from "lucide-react";
 
 export default async function SiswaSertifikatPage() {
   const user = await requireRole("siswa");
@@ -23,7 +24,7 @@ export default async function SiswaSertifikatPage() {
 
       {certs.length === 0 ? (
         <div className="card p-10 text-center">
-          <div className="mb-3 text-4xl">🏆</div>
+          <Award className="mx-auto mb-3 h-10 w-10 text-muted/60" aria-hidden="true" />
           <h3 className="mb-1 font-semibold">Belum ada sertifikat</h3>
           <p className="text-sm text-muted">
             Kerjakan ujian dan lulus untuk mendapatkan sertifikat pertamamu.
@@ -60,7 +61,9 @@ export default async function SiswaSertifikatPage() {
             {certs.map((c) => (
               <div key={c.id} className="card flex flex-col p-5">
                 <div className="mb-2 flex items-center gap-2">
-                  <span className="text-2xl">🏆</span>
+                  <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-accent-soft text-accent">
+                    <Award className="h-5 w-5" aria-hidden="true" />
+                  </div>
                   <span className="rounded-full bg-accent-soft px-2.5 py-1 text-xs text-accent">
                     Nilai {c.score}
                   </span>

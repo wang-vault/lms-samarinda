@@ -8,6 +8,7 @@ import {
   getInstructorCertificates,
   formatIssueDate,
 } from "@/lib/certificate-lib";
+import { Award, BookOpen } from "lucide-react";
 
 export default async function InstrukturSertifikatPage() {
   const user = await requireRole("instruktur");
@@ -31,7 +32,7 @@ export default async function InstrukturSertifikatPage() {
 
       {certs.length === 0 ? (
         <div className="card p-10 text-center">
-          <div className="mb-3 text-4xl">🏆</div>
+          <Award className="mx-auto mb-3 h-10 w-10 text-muted/60" aria-hidden="true" />
           <h3 className="mb-1 font-semibold">Belum ada sertifikat diterbitkan</h3>
           <p className="text-sm text-muted">
             Sertifikat akan muncul di sini setelah siswa lulus ujian di kursusmu.
@@ -68,7 +69,8 @@ export default async function InstrukturSertifikatPage() {
             {[...byCourse.entries()].map(([courseTitle, items]) => (
               <section key={courseTitle}>
                 <h2 className="mb-3 flex items-center gap-2 font-semibold">
-                  <span>📚</span> {courseTitle}
+                  <BookOpen className="h-5 w-5 text-accent" aria-hidden="true" />
+                  <span>{courseTitle}</span>
                 </h2>
                 <div className="card overflow-hidden p-0">
                   <div className="overflow-x-auto">

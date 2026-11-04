@@ -332,7 +332,7 @@ export async function getChatCompletion({
     const lastUserMessage =
       [...sanitized].reverse().find((m) => m.role === "user")?.content || "";
     const base = generateLocalFallbackAnswer(lastUserMessage, lmsContext, userName);
-    return `${base}\n\n---\n*💡 Catatan: Menjawab via basis pengetahuan lokal Litani (Mode Standar).*`;
+    return `${base}\n\n---\n*Catatan: Menjawab via basis pengetahuan lokal Litani (Mode Standar).*`;
   }
 
   // Panggil Anthropic API
@@ -364,6 +364,6 @@ export async function getChatCompletion({
     const lastUserMessage =
       [...sanitized].reverse().find((m) => m.role === "user")?.content || "";
     const base = generateLocalFallbackAnswer(lastUserMessage, lmsContext, userName);
-    return `${base}\n\n---\n*⚠️ Layanan Claude API sementara tidak dapat dihubungi. Menjawab via basis pengetahuan lokal.*`;
+    return `${base}\n\n---\n*Pemberitahuan: Layanan Claude API sementara tidak dapat dihubungi. Menjawab via basis pengetahuan lokal.*`;
   }
 }

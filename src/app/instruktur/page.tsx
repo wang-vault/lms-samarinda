@@ -5,6 +5,7 @@ import { courses, materials, videos, quizzes, quizSubmissions } from "@/db/schem
 import { requireRole } from "@/lib/auth-helpers";
 import { PageHeader } from "@/components/layout/page-header";
 import Link from "next/link";
+import { BookOpen, FileText, ClipboardList, Clock } from "lucide-react";
 
 export default async function InstrukturDashboardPage() {
   const user = await requireRole("instruktur");
@@ -54,13 +55,31 @@ export default async function InstrukturDashboardPage() {
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {[
-          { label: "Kursus Saya", value: myCourses.length, icon: "📚" },
-          { label: "Materi Dibuat", value: myMaterials.length, icon: "📄" },
-          { label: "Quiz Dibuat", value: myQuizzes.length, icon: "📝" },
-          { label: "Menunggu Penilaian", value: ungraded.length, icon: "⏳" },
+          {
+            label: "Kursus Saya",
+            value: myCourses.length,
+            icon: <BookOpen className="h-5 w-5" aria-hidden="true" />,
+          },
+          {
+            label: "Materi Dibuat",
+            value: myMaterials.length,
+            icon: <FileText className="h-5 w-5" aria-hidden="true" />,
+          },
+          {
+            label: "Quiz Dibuat",
+            value: myQuizzes.length,
+            icon: <ClipboardList className="h-5 w-5" aria-hidden="true" />,
+          },
+          {
+            label: "Menunggu Penilaian",
+            value: ungraded.length,
+            icon: <Clock className="h-5 w-5" aria-hidden="true" />,
+          },
         ].map((stat) => (
           <div key={stat.label} className="card p-5">
-            <div className="mb-2 text-2xl">{stat.icon}</div>
+            <div className="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-lg bg-accent-soft text-accent">
+              {stat.icon}
+            </div>
             <p className="text-2xl font-bold">{stat.value}</p>
             <p className="text-sm text-muted">{stat.label}</p>
           </div>

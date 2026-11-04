@@ -5,31 +5,45 @@
 
 import { useState, useEffect, useRef } from "react";
 import type { ChatMessage } from "@/lib/chat-service";
+import {
+  Lightbulb,
+  FileText,
+  MapPin,
+  TrendingUp,
+  Bot,
+  Trash2,
+  Rocket,
+  Copy,
+  Check,
+  AlertTriangle,
+  Square,
+  Send,
+} from "lucide-react";
 
 const LOCAL_STORAGE_KEY = "lms_litani_chat_v1";
 
 // Pertanyaan pancingan awal seputar wirausaha di Samarinda
 const QUICK_PROMPTS = [
   {
-    icon: "💡",
+    icon: <Lightbulb className="h-5 w-5 text-accent" aria-hidden="true" />,
     title: "Modal Minim < 1 Juta",
     prompt:
       "Bagaimana cara mulai usaha kuliner di Samarinda dengan modal di bawah Rp 1 juta?",
   },
   {
-    icon: "📜",
+    icon: <FileText className="h-5 w-5 text-accent" aria-hidden="true" />,
     title: "Legalitas & NIB",
     prompt:
       "Apa saja langkah mengurus NIB gratis lewat OSS untuk UMKM di Samarinda?",
   },
   {
-    icon: "📍",
+    icon: <MapPin className="h-5 w-5 text-accent" aria-hidden="true" />,
     title: "Spot Usaha Samarinda",
     prompt:
       "Di mana lokasi strategis dan ramai untuk jualan kuliner atau minuman di Samarinda?",
   },
   {
-    icon: "📈",
+    icon: <TrendingUp className="h-5 w-5 text-accent" aria-hidden="true" />,
     title: "Pemasaran Lokal",
     prompt:
       "Strategi pemasaran apa yang paling efektif menarik konsumen anak muda di Samarinda?",
@@ -393,8 +407,8 @@ export function ChatInterface({ userName }: { userName: string }) {
       {/* Header Bar Obrolan */}
       <div className="flex items-center justify-between border-b border-border bg-surface px-4 py-3">
         <div className="flex items-center gap-3">
-          <div className="relative flex h-10 w-10 items-center justify-center rounded-full bg-accent-soft text-xl">
-            👩‍💼
+          <div className="relative flex h-10 w-10 items-center justify-center rounded-full bg-accent text-white">
+            <Bot className="h-5 w-5" aria-hidden="true" />
             <span
               className="absolute bottom-0 right-0 h-3 w-3 rounded-full border-2 border-surface bg-green-500"
               title="Online"
@@ -420,7 +434,7 @@ export function ChatInterface({ userName }: { userName: string }) {
             className="flex items-center gap-1.5 rounded-lg border border-border px-2.5 py-1.5 text-xs text-muted hover:border-red-400 hover:text-red-500 transition-colors"
             title="Bersihkan obrolan"
           >
-            <span>🗑️</span>
+            <Trash2 className="h-3.5 w-3.5" aria-hidden="true" />
             <span className="hidden sm:inline">Hapus Obrolan</span>
           </button>
         )}
@@ -431,8 +445,8 @@ export function ChatInterface({ userName }: { userName: string }) {
         {/* Tampilan awal jika belum ada percakapan */}
         {messages.length === 0 && (
           <div className="mx-auto max-w-xl py-6 text-center">
-            <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-accent-soft text-3xl shadow-inner">
-              🚀
+            <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-accent-soft text-accent shadow-inner">
+              <Rocket className="h-8 w-8" aria-hidden="true" />
             </div>
             <h3 className="mt-4 text-lg font-bold text-foreground">
               Halo, {userName}! Siap mulai usahamu dari nol?
@@ -456,7 +470,9 @@ export function ChatInterface({ userName }: { userName: string }) {
                     onClick={() => handleSendMessage(item.prompt)}
                     className="flex items-start gap-3 rounded-xl border border-border bg-surface p-3 text-left transition-all hover:border-accent hover:bg-accent-soft group"
                   >
-                    <span className="text-xl">{item.icon}</span>
+                    <div className="rounded-lg bg-accent-soft p-1.5 text-accent">
+                      {item.icon}
+                    </div>
                     <div className="flex-1">
                       <p className="text-xs font-bold text-foreground group-hover:text-accent">
                         {item.title}
@@ -490,7 +506,11 @@ export function ChatInterface({ userName }: { userName: string }) {
                     : "bg-accent-soft text-accent border border-accent/30"
                 }`}
               >
-                {isUser ? userName.charAt(0).toUpperCase() : "👩‍💼"}
+                {isUser ? (
+                  userName.charAt(0).toUpperCase()
+                ) : (
+                  <Bot className="h-4 w-4" aria-hidden="true" />
+                )}
               </div>
 
               {/* Balon Pesan */}
@@ -528,7 +548,17 @@ export function ChatInterface({ userName }: { userName: string }) {
                       className="hover:text-accent flex items-center gap-1 transition-colors"
                       title="Salin teks"
                     >
-                      <span>{copiedIndex === index ? "✓ Tersalin" : "📋 Salin"}</span>
+                      {copiedIndex === index ? (
+                        <>
+                          <Check className="h-3 w-3 text-green-600 dark:text-green-400" aria-hidden="true" />
+                          <span>Tersalin</span>
+                        </>
+                      ) : (
+                        <>
+                          <Copy className="h-3 w-3" aria-hidden="true" />
+                          <span>Salin</span>
+                        </>
+                      )}
                     </button>
                   </div>
                 )}
@@ -541,7 +571,7 @@ export function ChatInterface({ userName }: { userName: string }) {
         {error && (
           <div className="rounded-xl border border-red-300 bg-red-50 p-3 text-xs text-red-700 dark:border-red-900 dark:bg-red-950/40 dark:text-red-300 flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <span>⚠️</span>
+              <AlertTriangle className="h-4 w-4 shrink-0 text-red-600" aria-hidden="true" />
               <span>{error}</span>
             </div>
             <button
@@ -568,9 +598,10 @@ export function ChatInterface({ userName }: { userName: string }) {
             <button
               type="button"
               onClick={handleStopGenerating}
-              className="rounded border border-border px-2 py-0.5 text-xs font-medium hover:bg-accent-soft hover:text-accent transition-colors"
+              className="inline-flex items-center gap-1 rounded border border-border px-2 py-0.5 text-xs font-medium hover:bg-accent-soft hover:text-accent transition-colors"
             >
-              ⏹ Berhenti
+              <Square className="h-3 w-3 fill-current" aria-hidden="true" />
+              <span>Berhenti</span>
             </button>
           </div>
         )}
@@ -602,7 +633,7 @@ export function ChatInterface({ userName }: { userName: string }) {
             title="Kirim pesan"
             aria-label="Kirim pesan"
           >
-            <span>➤</span>
+            <Send className="h-4 w-4" aria-hidden="true" />
           </button>
         </form>
 

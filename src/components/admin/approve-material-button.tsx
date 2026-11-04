@@ -4,6 +4,7 @@
 
 import { useState, useTransition } from "react";
 import { approveMaterialAction, rejectMaterialAction } from "@/actions/materials";
+import { Check, X } from "lucide-react";
 
 export function ApproveMaterialButton({
   id,
@@ -47,17 +48,19 @@ export function ApproveMaterialButton({
         type="button"
         onClick={handleApprove}
         disabled={pending}
-        className={compact ? "btn-secondary text-xs" : "btn-primary text-sm"}
+        className={compact ? "btn-secondary text-xs inline-flex items-center gap-1" : "btn-primary text-sm inline-flex items-center gap-1.5"}
       >
-        {pending ? "Memproses..." : "✓ Setujui"}
+        <Check className="h-4 w-4" aria-hidden="true" />
+        <span>{pending ? "Memproses..." : "Setujui"}</span>
       </button>
       <button
         type="button"
         onClick={handleReject}
         disabled={pending}
-        className="rounded-lg border border-border px-3 py-1.5 text-sm text-red-600 transition-colors hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-950"
+        className="inline-flex items-center gap-1 rounded-lg border border-border px-3 py-1.5 text-sm text-red-600 transition-colors hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-950"
       >
-        ✗ Tolak
+        <X className="h-4 w-4" aria-hidden="true" />
+        <span>Tolak</span>
       </button>
       {error && (
         <p className="self-center text-xs text-red-600 dark:text-red-400">

@@ -5,6 +5,7 @@ import { materials, users, courses } from "@/db/schema";
 import { requireRole } from "@/lib/auth-helpers";
 import { PageHeader } from "@/components/layout/page-header";
 import Link from "next/link";
+import { Users, BookOpen, Clock, CircleCheck } from "lucide-react";
 
 export default async function AdminDashboardPage() {
   const user = await requireRole("admin");
@@ -34,13 +35,31 @@ export default async function AdminDashboardPage() {
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {[
-          { label: "Total Pengguna", value: totalUsers.length, icon: "👥" },
-          { label: "Total Kursus", value: totalCourses.length, icon: "📚" },
-          { label: "Materi Menunggu", value: pendingCount, icon: "⏳" },
-          { label: "Materi Disetujui", value: approvedMaterials.length, icon: "✅" },
+          {
+            label: "Total Pengguna",
+            value: totalUsers.length,
+            icon: <Users className="h-5 w-5" aria-hidden="true" />,
+          },
+          {
+            label: "Total Kursus",
+            value: totalCourses.length,
+            icon: <BookOpen className="h-5 w-5" aria-hidden="true" />,
+          },
+          {
+            label: "Materi Menunggu",
+            value: pendingCount,
+            icon: <Clock className="h-5 w-5" aria-hidden="true" />,
+          },
+          {
+            label: "Materi Disetujui",
+            value: approvedMaterials.length,
+            icon: <CircleCheck className="h-5 w-5" aria-hidden="true" />,
+          },
         ].map((stat) => (
           <div key={stat.label} className="card p-5">
-            <div className="mb-2 text-2xl">{stat.icon}</div>
+            <div className="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-lg bg-accent-soft text-accent">
+              {stat.icon}
+            </div>
             <p className="text-2xl font-bold">{stat.value}</p>
             <p className="text-sm text-muted">{stat.label}</p>
           </div>

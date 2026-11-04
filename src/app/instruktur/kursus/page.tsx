@@ -7,6 +7,7 @@ import { requireRole } from "@/lib/auth-helpers";
 import { PageHeader } from "@/components/layout/page-header";
 import { CourseFormDialog } from "@/components/instruktur/course-form-dialog";
 import { DeleteCourseButton } from "@/components/instruktur/delete-course-button";
+import { BookOpen } from "lucide-react";
 
 export default async function InstrukturKursusPage() {
   const user = await requireRole("instruktur");
@@ -41,7 +42,7 @@ export default async function InstrukturKursusPage() {
 
       {myCourses.length === 0 ? (
         <div className="card p-10 text-center">
-          <div className="mb-3 text-4xl">📚</div>
+          <BookOpen className="mx-auto mb-3 h-10 w-10 text-muted/60" aria-hidden="true" />
           <h3 className="mb-1 font-semibold">Belum ada kursus</h3>
           <p className="mb-4 text-sm text-muted">
             Buat kursus pertamamu untuk mulai mengunggah materi.

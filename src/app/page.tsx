@@ -1,6 +1,16 @@
 // Halaman landing LMS "Mulai Usaha dari Nol di Samarinda"
 import Link from "next/link";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
+import {
+  Rocket,
+  Sparkles,
+  BookOpen,
+  Video,
+  ClipboardList,
+  Bot,
+  MessageSquare,
+  Trophy,
+} from "lucide-react";
 
 export default function HomePage() {
   return (
@@ -9,7 +19,7 @@ export default function HomePage() {
       <header className="sticky top-0 z-30 border-b border-border bg-surface/80 backdrop-blur">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3.5">
           <div className="flex items-center gap-2">
-            <span className="text-2xl">🚀</span>
+            <Rocket className="h-6 w-6 text-accent shrink-0" aria-hidden="true" />
             <div>
               <h1 className="text-base font-bold leading-tight">
                 Mulai Usaha dari Nol
@@ -39,7 +49,7 @@ export default function HomePage() {
       <main className="flex flex-1 flex-col items-center justify-center px-4 py-16 sm:py-24 text-center">
         <div className="max-w-3xl">
           <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-accent/20 bg-accent-soft px-4 py-1.5 text-xs font-semibold text-accent">
-            <span>✨</span>
+            <Sparkles className="h-4 w-4" aria-hidden="true" />
             <span>Platform Pembelajaran Wirausaha Samarinda Terpadu</span>
           </div>
 
@@ -97,38 +107,40 @@ export default function HomePage() {
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {[
               {
-                icon: "📚",
+                icon: <BookOpen className="h-6 w-6" aria-hidden="true" />,
                 title: "Materi Kurikulum Lokal",
                 desc: "Panduan PDF dan modul bacaan bisnis kuliner, jasa, hingga perizinan legalitas UMKM Kota Samarinda.",
               },
               {
-                icon: "🎥",
+                icon: <Video className="h-6 w-6" aria-hidden="true" />,
                 title: "Video Streaming Terarah",
                 desc: "Pemutar video native dengan pelacakan progres belajar otomatis (HTTP Range video streaming).",
               },
               {
-                icon: "📝",
+                icon: <ClipboardList className="h-6 w-6" aria-hidden="true" />,
                 title: "Ujian & Sertifikasi Resmi",
                 desc: "Ujian pilihan ganda & essay berwaktu, penilaian otomatis, dan sertifikat ber-ID verifikasi PDF resmi.",
               },
               {
-                icon: "🤖",
+                icon: <Bot className="h-6 w-6" aria-hidden="true" />,
                 title: "Konsultan AI 'Litani'",
                 desc: "Asisten AI streaming ramah yang paham seluk-beluk tren konsumen dan perizinan usaha di Samarinda.",
               },
               {
-                icon: "💬",
+                icon: <MessageSquare className="h-6 w-6" aria-hidden="true" />,
                 title: "Forum Diskusi & Komunitas",
                 desc: "Wadah tanya-jawab interaktif antar siswa dan instruktur dengan notifikasi in-app instan.",
               },
               {
-                icon: "🏅",
+                icon: <Trophy className="h-6 w-6" aria-hidden="true" />,
                 title: "Jadwal Belajar & Leaderboard",
                 desc: "Atur target belajar mandiri dan raih poin gamifikasi berdasarkan kelulusan ujian dan materi.",
               },
             ].map((f) => (
               <div key={f.title} className="card p-6 transition-all hover:border-accent/40 hover:shadow-sm">
-                <div className="mb-3 text-3xl">{f.icon}</div>
+                <div className="mb-3 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-accent-soft text-accent">
+                  {f.icon}
+                </div>
                 <h4 className="mb-2 text-base font-semibold">{f.title}</h4>
                 <p className="text-sm text-muted leading-relaxed">{f.desc}</p>
               </div>
@@ -141,7 +153,7 @@ export default function HomePage() {
       <footer className="border-t border-border bg-surface py-8">
         <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-4 text-center sm:flex-row sm:text-left">
           <div className="flex items-center gap-2">
-            <span className="text-xl">🚀</span>
+            <Rocket className="h-5 w-5 text-accent shrink-0" aria-hidden="true" />
             <p className="text-xs text-muted">
               © 2026 <strong>Mulai Usaha dari Nol di Samarinda</strong>. Seluruh hak cipta dilindungi.
             </p>

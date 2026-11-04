@@ -4,6 +4,7 @@
 
 import { useActionState, useEffect, useState } from "react";
 import { createMaterialAction, type ActionState } from "@/actions/materials";
+import { Plus, FileEdit, FileText } from "lucide-react";
 
 type CourseOption = { id: string; title: string };
 
@@ -33,9 +34,10 @@ export function MaterialFormDialog({
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className="btn-primary text-sm"
+        className="btn-primary inline-flex items-center gap-1.5 text-sm"
       >
-        + Tambah Materi
+        <Plus className="h-4 w-4" aria-hidden="true" />
+        <span>Tambah Materi</span>
       </button>
 
       {open && (
@@ -99,24 +101,26 @@ export function MaterialFormDialog({
                   <button
                     type="button"
                     onClick={() => setType("teks")}
-                    className={`flex-1 rounded-lg border px-3 py-2 text-sm transition-colors ${
+                    className={`inline-flex flex-1 items-center justify-center gap-2 rounded-lg border px-3 py-2 text-sm transition-colors ${
                       type === "teks"
                         ? "border-accent bg-accent-soft text-accent"
-                        : "border-border text-muted"
+                        : "border-border text-muted hover:text-foreground"
                     }`}
                   >
-                    📝 Teks
+                    <FileEdit className="h-4 w-4" aria-hidden="true" />
+                    <span>Teks</span>
                   </button>
                   <button
                     type="button"
                     onClick={() => setType("pdf")}
-                    className={`flex-1 rounded-lg border px-3 py-2 text-sm transition-colors ${
+                    className={`inline-flex flex-1 items-center justify-center gap-2 rounded-lg border px-3 py-2 text-sm transition-colors ${
                       type === "pdf"
                         ? "border-accent bg-accent-soft text-accent"
-                        : "border-border text-muted"
+                        : "border-border text-muted hover:text-foreground"
                     }`}
                   >
-                    📕 PDF
+                    <FileText className="h-4 w-4 text-red-500" aria-hidden="true" />
+                    <span>PDF</span>
                   </button>
                 </div>
                 {/* Input tersembunyi agar server action terima "teks"/"pdf" */}

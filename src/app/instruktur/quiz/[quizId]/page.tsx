@@ -10,6 +10,7 @@ import { DeleteQuestionButton } from "@/components/instruktur/delete-question-bu
 import { QuizFormDialog } from "@/components/instruktur/quiz-form-dialog";
 import { DeleteQuizButton } from "@/components/instruktur/delete-quiz-button";
 import { EssayGradingDialog } from "@/components/instruktur/essay-grading-dialog";
+import { FileText, BarChart3, Check } from "lucide-react";
 
 // Soal yang diteruskan ke dialog grading essay
 type GradingQuestion = {
@@ -129,14 +130,15 @@ export default async function InstrukturQuizDetailPage({
       <section className="mb-8">
         <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
           <h2 className="flex items-center gap-2 font-semibold">
-            <span>📃</span> Daftar Soal ({questions.length})
+            <FileText className="h-5 w-5 text-accent" aria-hidden="true" />
+            <span>Daftar Soal ({questions.length})</span>
           </h2>
           <QuestionFormDialog quizId={quizId} />
         </div>
 
         {questions.length === 0 ? (
           <div className="card p-10 text-center">
-            <div className="mb-3 text-4xl">📃</div>
+            <FileText className="mx-auto mb-3 h-10 w-10 text-muted/60" aria-hidden="true" />
             <h3 className="mb-1 font-semibold">Belum ada soal</h3>
             <p className="mb-4 text-sm text-muted">
               Tambahkan soal pilihan ganda atau essay ke quiz ini.
@@ -175,7 +177,9 @@ export default async function InstrukturQuizDetailPage({
                             >
                               <span>{String.fromCharCode(65 + j)}.</span>
                               <span>{opt}</span>
-                              {j === q.correctOptionIndex && <span>✓</span>}
+                              {j === q.correctOptionIndex && (
+                                <Check className="h-4 w-4 text-green-600 dark:text-green-400" aria-hidden="true" />
+                              )}
                             </li>
                           ))}
                         </ul>
@@ -209,12 +213,13 @@ export default async function InstrukturQuizDetailPage({
 
       <section>
         <h2 className="mb-3 flex items-center gap-2 font-semibold">
-          <span>📊</span> Hasil Siswa ({submissions.length})
+          <BarChart3 className="h-5 w-5 text-accent" aria-hidden="true" />
+          <span>Hasil Siswa ({submissions.length})</span>
         </h2>
 
         {submissions.length === 0 ? (
           <div className="card p-10 text-center">
-            <div className="mb-3 text-4xl">📊</div>
+            <BarChart3 className="mx-auto mb-3 h-10 w-10 text-muted/60" aria-hidden="true" />
             <h3 className="mb-1 font-semibold">Belum ada yang mengerjakan</h3>
             <p className="text-sm text-muted">
               Hasil ujian siswa akan muncul di sini setelah mereka submit.

@@ -1,5 +1,6 @@
 // Layout bersama untuk halaman login & register
 import Link from "next/link";
+import { Rocket } from "lucide-react";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 
 export function AuthShell({
@@ -17,7 +18,7 @@ export function AuthShell({
     <div className="flex min-h-screen flex-col bg-background">
       <header className="flex items-center justify-between px-4 py-4 sm:px-8">
         <Link href="/" className="flex items-center gap-2">
-          <span className="text-xl">🚀</span>
+          <Rocket className="h-5 w-5 text-accent shrink-0" aria-hidden="true" />
           <span className="text-sm font-semibold">Mulai Usaha dari Nol</span>
         </Link>
         <ThemeToggle />

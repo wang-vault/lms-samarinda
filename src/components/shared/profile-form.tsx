@@ -4,6 +4,7 @@
 
 import { useState, useTransition } from "react";
 import { updateProfileAction } from "@/actions/support";
+import { AlertTriangle, Check } from "lucide-react";
 
 export function ProfileForm({
   user,
@@ -72,14 +73,16 @@ export function ProfileForm({
       </div>
 
       {error && (
-        <div className="rounded-lg bg-red-50 p-3 text-xs text-red-600 dark:bg-red-950/40 dark:text-red-300">
-          ⚠️ {error}
+        <div className="flex items-center gap-2 rounded-lg bg-red-50 p-3 text-xs text-red-600 dark:bg-red-950/40 dark:text-red-300">
+          <AlertTriangle className="h-4 w-4 shrink-0" aria-hidden="true" />
+          <span>{error}</span>
         </div>
       )}
 
       {success && (
-        <div className="rounded-lg bg-green-50 p-3 text-xs text-green-700 dark:bg-green-950/40 dark:text-green-300">
-          ✓ {success}
+        <div className="flex items-center gap-2 rounded-lg bg-green-50 p-3 text-xs text-green-700 dark:bg-green-950/40 dark:text-green-300">
+          <Check className="h-4 w-4 shrink-0" aria-hidden="true" />
+          <span>{success}</span>
         </div>
       )}
 

@@ -4,6 +4,7 @@
 
 import { useTransition } from "react";
 import { deleteMaterialAction } from "@/actions/materials";
+import { Trash2 } from "lucide-react";
 
 export function DeleteMaterialButton({
   id,
@@ -27,10 +28,11 @@ export function DeleteMaterialButton({
       type="button"
       onClick={handleDelete}
       disabled={pending}
+      aria-label={`Hapus materi ${title}`}
       title="Hapus materi"
-      className="rounded-lg border border-border px-2.5 py-1.5 text-sm text-red-600 transition-colors hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-950"
+      className="inline-flex items-center justify-center rounded-lg border border-border p-2 text-sm text-red-600 transition-colors hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-950"
     >
-      {pending ? "…" : "🗑"}
+      {pending ? "…" : <Trash2 className="h-4 w-4" aria-hidden="true" />}
     </button>
   );
 }

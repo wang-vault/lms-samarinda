@@ -8,6 +8,7 @@ import { requireRole } from "@/lib/auth-helpers";
 import { PageHeader } from "@/components/layout/page-header";
 import { getStudentQuizData } from "@/lib/quiz-queries";
 import { QuizRunner } from "@/components/siswa/quiz-runner";
+import { FileText } from "lucide-react";
 
 export default async function SiswaUjianDetailPage({
   params,
@@ -71,7 +72,7 @@ export default async function SiswaUjianDetailPage({
         />
       ) : (
         <div className="card p-10 text-center">
-          <div className="mb-3 text-4xl">📃</div>
+          <FileText className="mx-auto mb-3 h-10 w-10 text-muted/60" aria-hidden="true" />
           <h3 className="mb-1 font-semibold">Quiz belum memiliki soal</h3>
           <p className="text-sm text-muted">
             Ujian ini belum bisa dikerjakan. Silakan kembali nanti.

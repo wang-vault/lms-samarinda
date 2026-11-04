@@ -135,7 +135,7 @@ export async function POST(req: NextRequest) {
         // Mode lokal / fallback jika API key belum disetel
         const lastUserText = lastMsg.content;
         const answer = generateLocalFallbackAnswer(lastUserText, lmsContext, userName);
-        const disclaimer = "\n\n---\n*💡 Catatan: Menjawab via basis pengetahuan lokal Litani (Mode Standar).*";
+        const disclaimer = "\n\n---\n*Catatan: Menjawab via basis pengetahuan lokal Litani (Mode Standar).*";
         const fullAnswer = answer + disclaimer;
 
         // Pecah teks menjadi token/potongan kecil untuk efek ketikan mengalir
@@ -155,7 +155,7 @@ export async function POST(req: NextRequest) {
           const answer = generateLocalFallbackAnswer(lastUserText, lmsContext, userName);
           const fullAnswer =
             answer +
-            "\n\n---\n*⚠️ Layanan Claude API sementara tidak dapat dihubungi. Menjawab via basis pengetahuan lokal.*";
+            "\n\n---\n*Pemberitahuan: Layanan Claude API sementara tidak dapat dihubungi. Menjawab via basis pengetahuan lokal.*";
 
           const chunks = fullAnswer.match(/.{1,12}/g) || [fullAnswer];
           for (const chunk of chunks) {

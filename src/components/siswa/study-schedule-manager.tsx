@@ -8,6 +8,15 @@ import {
   deleteStudyScheduleAction,
 } from "@/actions/support";
 import type { ScheduleItem } from "@/lib/support-queries";
+import {
+  Calendar,
+  Plus,
+  X,
+  AlertTriangle,
+  BookOpen,
+  Target,
+  Trash2,
+} from "lucide-react";
 
 export function StudyScheduleManager({
   schedules,
@@ -71,14 +80,19 @@ export function StudyScheduleManager({
           onClick={() => setShowAddForm(!showAddForm)}
           className="btn-primary text-xs inline-flex items-center gap-1.5"
         >
-          <span>{showAddForm ? "✕" : "+"}</span>
+          {showAddForm ? (
+            <X className="h-3.5 w-3.5" aria-hidden="true" />
+          ) : (
+            <Plus className="h-3.5 w-3.5" aria-hidden="true" />
+          )}
           <span>{showAddForm ? "Tutup Form" : "Tambah Jadwal"}</span>
         </button>
       </div>
 
       {actionError && (
-        <div className="rounded-lg bg-red-50 p-3 text-xs text-red-600 dark:bg-red-950/40 dark:text-red-300">
-          ⚠️ {actionError}
+        <div className="flex items-center gap-2 rounded-lg bg-red-50 p-3 text-xs text-red-600 dark:bg-red-950/40 dark:text-red-300">
+          <AlertTriangle className="h-4 w-4 shrink-0" aria-hidden="true" />
+          <span>{actionError}</span>
         </div>
       )}
 
@@ -166,7 +180,7 @@ export function StudyScheduleManager({
 
         {upcoming.length === 0 ? (
           <div className="card p-6 text-center text-muted">
-            <span className="text-2xl block mb-1">📅</span>
+            <Calendar className="mx-auto mb-2 h-10 w-10 text-muted/60" aria-hidden="true" />
             <p className="text-sm font-semibold text-foreground">
               Belum ada jadwal belajar mendatang.
             </p>
@@ -186,9 +200,9 @@ export function StudyScheduleManager({
                   }`}
                 >
                   <div className="flex items-start gap-3">
-                    <span className="text-2xl shrink-0 mt-0.5">
-                      {isToday ? "🎯" : "📌"}
-                    </span>
+                    <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-accent-soft text-accent">
+                      <Target className="h-5 w-5" aria-hidden="true" />
+                    </div>
                     <div>
                       <div className="flex items-center gap-2">
                         <p className="text-sm font-bold text-foreground">
@@ -201,12 +215,14 @@ export function StudyScheduleManager({
                         )}
                       </div>
                       {item.courseTitle && (
-                        <p className="text-xs text-accent font-medium mt-0.5">
-                          📚 {item.courseTitle}
+                        <p className="inline-flex items-center gap-1 text-xs text-accent font-medium mt-0.5">
+                          <BookOpen className="h-3.5 w-3.5" aria-hidden="true" />
+                          <span>{item.courseTitle}</span>
                         </p>
                       )}
-                      <p className="text-[11px] text-muted mt-1">
-                        🗓️ {item.scheduledDate}
+                      <p className="inline-flex items-center gap-1 text-[11px] text-muted mt-1">
+                        <Calendar className="h-3 w-3" aria-hidden="true" />
+                        <span>{item.scheduledDate}</span>
                       </p>
                     </div>
                   </div>
@@ -215,10 +231,11 @@ export function StudyScheduleManager({
                     type="button"
                     onClick={() => handleDelete(item.id)}
                     disabled={isPending}
-                    className="text-muted hover:text-red-500 text-xs p-1"
+                    aria-label="Hapus jadwal"
+                    className="rounded p-1 text-muted hover:text-red-500 transition-colors"
                     title="Hapus jadwal"
                   >
-                    ✕
+                    <Trash2 className="h-4 w-4" aria-hidden="true" />
                   </button>
                 </div>
               );
@@ -243,18 +260,20 @@ export function StudyScheduleManager({
                   <p className="text-xs font-medium text-foreground line-through">
                     {item.title}
                   </p>
-                  <p className="text-[10px] text-muted">
-                    🗓️ {item.scheduledDate} {item.courseTitle ? `· ${item.courseTitle}` : ""}
+                  <p className="inline-flex items-center gap-1 text-[10px] text-muted">
+                    <Calendar className="h-3 w-3" aria-hidden="true" />
+                    <span>{item.scheduledDate} {item.courseTitle ? `· ${item.courseTitle}` : ""}</span>
                   </p>
                 </div>
                 <button
                   type="button"
                   onClick={() => handleDelete(item.id)}
                   disabled={isPending}
-                  className="text-muted hover:text-red-500 text-[11px]"
+                  aria-label="Hapus riwayat jadwal"
+                  className="rounded p-1 text-muted hover:text-red-500 transition-colors"
                   title="Hapus"
                 >
-                  ✕
+                  <Trash2 className="h-3.5 w-3.5" aria-hidden="true" />
                 </button>
               </div>
             ))}

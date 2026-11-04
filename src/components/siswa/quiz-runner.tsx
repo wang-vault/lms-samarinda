@@ -10,6 +10,15 @@ import type {
   ReviewItem,
   StudentQuiz,
 } from "@/lib/quiz-queries";
+import {
+  ClipboardList,
+  CheckCircle2,
+  AlertTriangle,
+  Clock,
+  History,
+  ChevronDown,
+  ChevronUp,
+} from "lucide-react";
 
 type AnswerMap = Record<string, string | number | null>;
 
@@ -160,8 +169,14 @@ export function QuizRunner({
       <div className="space-y-6">
         {result && (
           <div className="card p-6 text-center">
-            <div className="mb-2 text-4xl">
-              {quiz.hasEssay ? "📋" : result.passed ? "🎉" : "📋"}
+            <div className="mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-2xl bg-accent-soft text-accent">
+              {quiz.hasEssay ? (
+                <ClipboardList className="h-8 w-8" aria-hidden="true" />
+              ) : result.passed ? (
+                <CheckCircle2 className="h-8 w-8 text-green-600 dark:text-green-400" aria-hidden="true" />
+              ) : (
+                <ClipboardList className="h-8 w-8 text-muted" aria-hidden="true" />
+              )}
             </div>
             <h2 className="mb-1 text-lg font-bold">Ujian dikumpulkan!</h2>
             <p className="mb-4 text-sm text-muted">
@@ -209,7 +224,7 @@ export function QuizRunner({
         )}
         {submitError && !result && (
           <div className="card p-6 text-center">
-            <div className="mb-2 text-4xl">⚠️</div>
+            <AlertTriangle className="mx-auto mb-2 h-10 w-10 text-red-500" aria-hidden="true" />
             <h2 className="mb-1 text-lg font-bold">Gagal mengumpulkan</h2>
             <p className="text-sm text-red-600 dark:text-red-400">
               {submitError}
@@ -251,7 +266,7 @@ export function QuizRunner({
         </div>
         <div
           className={
-            "rounded-lg px-3 py-1.5 font-mono text-lg font-bold tabular-nums " +
+            "flex items-center gap-1.5 rounded-lg px-3 py-1.5 font-mono text-lg font-bold tabular-nums " +
             (low
               ? "bg-red-100 text-red-700 dark:bg-red-950 dark:text-red-300"
               : "bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300")
@@ -259,7 +274,8 @@ export function QuizRunner({
           role="timer"
           aria-label="Sisa waktu ujian"
         >
-          ⏱ {formatDuration(remaining)}
+          <Clock className="h-5 w-5 shrink-0" aria-hidden="true" />
+          <span>{formatDuration(remaining)}</span>
         </div>
         <button
           type="button"
@@ -394,7 +410,8 @@ function QuizHistory({
   return (
     <div className="card p-6">
       <h2 className="mb-3 flex items-center gap-2 font-semibold">
-        <span>🕘</span> Riwayat Pengerjaan ({attempts.length})
+        <History className="h-5 w-5 text-accent" aria-hidden="true" />
+        <span>Riwayat Pengerjaan ({attempts.length})</span>
       </h2>
       {attempts.length === 0 ? (
         <p className="rounded-lg bg-amber-50 px-3 py-2 text-sm text-amber-700 dark:bg-amber-950 dark:text-amber-300">
@@ -419,12 +436,18 @@ function QuizHistory({
                     aria-expanded={open}
                   >
                     <AttemptSummary a={a} attemptNo={attemptNo} />
-                    <span className="text-xs text-muted">
-                      {new Date(a.submittedAt).toLocaleString("id-ID", {
-                        dateStyle: "medium",
-                        timeStyle: "short",
-                      })}{" "}
-                      {open ? "▲" : "▼"}
+                    <span className="flex items-center gap-1 text-xs text-muted">
+                      <span>
+                        {new Date(a.submittedAt).toLocaleString("id-ID", {
+                          dateStyle: "medium",
+                          timeStyle: "short",
+                        })}
+                      </span>
+                      {open ? (
+                        <ChevronUp className="h-3.5 w-3.5" aria-hidden="true" />
+                      ) : (
+                        <ChevronDown className="h-3.5 w-3.5" aria-hidden="true" />
+                      )}
                     </span>
                   </button>
                 ) : (

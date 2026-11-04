@@ -4,6 +4,7 @@
 
 import { useTransition } from "react";
 import { deleteQuestionAction } from "@/actions/quizzes";
+import { Trash2 } from "lucide-react";
 
 export function DeleteQuestionButton({
   id,
@@ -28,10 +29,11 @@ export function DeleteQuestionButton({
       type="button"
       onClick={handleDelete}
       disabled={pending}
+      aria-label="Hapus soal"
       title="Hapus soal"
-      className="rounded-lg border border-border px-2.5 py-1.5 text-sm text-red-600 transition-colors hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-950"
+      className="inline-flex items-center justify-center rounded-lg border border-border p-2 text-sm text-red-600 transition-colors hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-950"
     >
-      {pending ? "…" : "🗑"}
+      {pending ? "…" : <Trash2 className="h-4 w-4" aria-hidden="true" />}
     </button>
   );
 }

@@ -5,6 +5,14 @@
 import { useState, useTransition } from "react";
 import { createForumPostAction, deleteForumPostAction } from "@/actions/support";
 import type { ForumPostWithAuthor } from "@/lib/support-queries";
+import {
+  MessageSquare,
+  Send,
+  Trash2,
+  Reply,
+  X,
+  AlertTriangle,
+} from "lucide-react";
 
 export function ForumThreadList({
   courseId,
@@ -79,8 +87,9 @@ export function ForumThreadList({
         </p>
 
         {actionError && (
-          <div className="mb-3 rounded-lg bg-red-50 p-2.5 text-xs text-red-600 dark:bg-red-950/40 dark:text-red-300">
-            ⚠️ {actionError}
+          <div className="mb-3 flex items-center gap-2 rounded-lg bg-red-50 p-2.5 text-xs text-red-600 dark:bg-red-950/40 dark:text-red-300">
+            <AlertTriangle className="h-4 w-4 shrink-0" aria-hidden="true" />
+            <span>{actionError}</span>
           </div>
         )}
 
@@ -99,7 +108,8 @@ export function ForumThreadList({
               disabled={isPending}
               className="btn-primary text-xs inline-flex items-center gap-1.5"
             >
-              <span>💬</span> {isPending ? "Mengirim..." : "Kirim Diskusi"}
+              <Send className="h-3.5 w-3.5" aria-hidden="true" />
+              <span>{isPending ? "Mengirim..." : "Kirim Diskusi"}</span>
             </button>
           </div>
         </form>
@@ -109,7 +119,7 @@ export function ForumThreadList({
       <div className="space-y-4">
         {threads.length === 0 ? (
           <div className="card p-8 text-center text-muted">
-            <span className="text-3xl block mb-2">💬</span>
+            <MessageSquare className="mx-auto mb-2 h-10 w-10 text-muted/60" aria-hidden="true" />
             <p className="text-sm font-semibold text-foreground">
               Belum ada diskusi untuk kursus ini.
             </p>
@@ -150,10 +160,11 @@ export function ForumThreadList({
                     type="button"
                     onClick={() => handleDeletePost(thread.id)}
                     disabled={isPending}
-                    className="text-xs text-muted hover:text-red-500 transition-colors"
+                    aria-label="Hapus diskusi"
+                    className="rounded p-1 text-muted hover:text-red-500 transition-colors"
                     title="Hapus diskusi"
                   >
-                    🗑️
+                    <Trash2 className="h-4 w-4" aria-hidden="true" />
                   </button>
                 )}
               </div>
@@ -172,7 +183,8 @@ export function ForumThreadList({
                   }
                   className="text-xs text-accent hover:underline font-medium inline-flex items-center gap-1"
                 >
-                  <span>↩</span> {replyingTo === thread.id ? "Batal" : "Balas"}
+                  <Reply className="h-3.5 w-3.5" aria-hidden="true" />
+                  <span>{replyingTo === thread.id ? "Batal" : "Balas"}</span>
                 </button>
                 <span className="text-[11px] text-muted">
                   {thread.replies?.length || 0} balasan
@@ -242,10 +254,11 @@ export function ForumThreadList({
                             type="button"
                             onClick={() => handleDeletePost(reply.id)}
                             disabled={isPending}
-                            className="text-[11px] text-muted hover:text-red-500"
+                            aria-label="Hapus balasan"
+                            className="rounded p-0.5 text-muted hover:text-red-500 transition-colors"
                             title="Hapus balasan"
                           >
-                            ✕
+                            <X className="h-3.5 w-3.5" aria-hidden="true" />
                           </button>
                         )}
                       </div>

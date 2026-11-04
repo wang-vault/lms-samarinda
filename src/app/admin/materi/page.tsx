@@ -5,6 +5,7 @@ import { PageHeader } from "@/components/layout/page-header";
 import { MaterialStatusBadge } from "@/components/shared/material-status-badge";
 import { ApproveMaterialButton } from "@/components/admin/approve-material-button";
 import { getMaterialsWithRelations } from "@/lib/material-queries";
+import { FileText, FileEdit } from "lucide-react";
 
 export default async function AdminMateriPage() {
   await requireRole("admin");
@@ -34,8 +35,12 @@ export default async function AdminMateriPage() {
                 <div className="flex flex-wrap items-start justify-between gap-3">
                   <div className="min-w-0">
                     <div className="flex flex-wrap items-center gap-2">
-                      <span className="text-lg">
-                        {m.type === "pdf" ? "📕" : "📝"}
+                      <span className="shrink-0 text-muted">
+                        {m.type === "pdf" ? (
+                          <FileText className="h-5 w-5 text-red-500" aria-hidden="true" />
+                        ) : (
+                          <FileEdit className="h-5 w-5 text-accent" aria-hidden="true" />
+                        )}
                       </span>
                       <h3 className="font-medium">{m.title}</h3>
                       <MaterialStatusBadge status={m.status} />
@@ -71,8 +76,12 @@ export default async function AdminMateriPage() {
                 <div className="flex flex-wrap items-center justify-between gap-3">
                   <div className="min-w-0">
                     <div className="flex flex-wrap items-center gap-2">
-                      <span className="text-lg">
-                        {m.type === "pdf" ? "📕" : "📝"}
+                      <span className="shrink-0 text-muted">
+                        {m.type === "pdf" ? (
+                          <FileText className="h-5 w-5 text-red-500" aria-hidden="true" />
+                        ) : (
+                          <FileEdit className="h-5 w-5 text-accent" aria-hidden="true" />
+                        )}
                       </span>
                       <h3 className="font-medium">{m.title}</h3>
                       <MaterialStatusBadge status={m.status} />

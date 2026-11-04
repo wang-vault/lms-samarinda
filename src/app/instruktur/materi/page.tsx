@@ -7,6 +7,7 @@ import { PageHeader } from "@/components/layout/page-header";
 import { MaterialFormDialog } from "@/components/instruktur/material-form-dialog";
 import { DeleteMaterialButton } from "@/components/instruktur/delete-material-button";
 import { MaterialStatusBadge } from "@/components/shared/material-status-badge";
+import { FileText, FileEdit } from "lucide-react";
 
 export default async function InstrukturMateriPage({
   searchParams,
@@ -30,7 +31,7 @@ export default async function InstrukturMateriPage({
           description="Kelola materi pembelajaran yang kamu buat."
         />
         <div className="card p-10 text-center">
-          <div className="mb-3 text-4xl">📄</div>
+          <FileText className="mx-auto mb-3 h-10 w-10 text-muted/60" aria-hidden="true" />
           <h3 className="mb-1 font-semibold">Belum ada kursus</h3>
           <p className="text-sm text-muted">
             Buat kursus terlebih dahulu di halaman{" "}
@@ -114,7 +115,7 @@ export default async function InstrukturMateriPage({
 
       {visible.length === 0 ? (
         <div className="card p-10 text-center">
-          <div className="mb-3 text-4xl">📄</div>
+          <FileText className="mx-auto mb-3 h-10 w-10 text-muted/60" aria-hidden="true" />
           <h3 className="mb-1 font-semibold">Belum ada materi</h3>
           <p className="text-sm text-muted">
             Tambahkan materi teks atau PDF untuk kursus pertamamu.
@@ -125,7 +126,11 @@ export default async function InstrukturMateriPage({
           {visible.map((m) => (
             <div key={m.id} className="card flex items-center gap-4 p-4">
               <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-accent-soft text-lg">
-                {m.type === "pdf" ? "📕" : "📝"}
+                {m.type === "pdf" ? (
+                  <FileText className="h-5 w-5 text-red-500" aria-hidden="true" />
+                ) : (
+                  <FileEdit className="h-5 w-5 text-accent" aria-hidden="true" />
+                )}
               </div>
               <div className="min-w-0 flex-1">
                 <div className="flex flex-wrap items-center gap-2">

@@ -8,6 +8,7 @@ import { courses, videos, videoProgress } from "@/db/schema";
 import { requireRole } from "@/lib/auth-helpers";
 import { PageHeader } from "@/components/layout/page-header";
 import { formatDuration } from "@/lib/file-storage";
+import { Video } from "lucide-react";
 
 export default async function SiswaVideoPage() {
   const user = await requireRole("siswa");
@@ -66,7 +67,7 @@ export default async function SiswaVideoPage() {
 
       {grouped.size === 0 ? (
         <div className="card p-10 text-center">
-          <div className="mb-3 text-4xl">🎥</div>
+          <Video className="mx-auto mb-3 h-10 w-10 text-muted/60" aria-hidden="true" />
           <h3 className="mb-1 font-semibold">Belum ada video tersedia</h3>
           <p className="text-sm text-muted">
             Video akan muncul setelah instruktur mengunggahnya.
@@ -84,7 +85,9 @@ export default async function SiswaVideoPage() {
               >
                 <div className="mb-2 flex items-start justify-between gap-2">
                   <h3 className="font-semibold">{g.title}</h3>
-                  <span className="text-2xl">🎥</span>
+                  <div className="rounded-lg bg-accent-soft p-1.5 text-accent">
+                    <Video className="h-5 w-5" aria-hidden="true" />
+                  </div>
                 </div>
                 <p className="mb-3 flex-1 text-xs text-muted line-clamp-2">
                   {g.description || "Tanpa deskripsi"}

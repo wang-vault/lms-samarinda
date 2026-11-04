@@ -8,6 +8,13 @@ import {
   markAllNotificationsReadAction,
 } from "@/actions/support";
 import type { NotificationItem } from "@/lib/support-queries";
+import {
+  Bell,
+  CheckCheck,
+  Trophy,
+  AlertTriangle,
+  Info,
+} from "lucide-react";
 
 export function NotificationList({
   initialNotifications,
@@ -70,9 +77,10 @@ export function NotificationList({
             type="button"
             onClick={handleMarkAllRead}
             disabled={isPending}
-            className="text-xs text-accent hover:underline font-medium inline-flex items-center gap-1"
+            className="text-xs text-accent hover:underline font-medium inline-flex items-center gap-1.5"
           >
-            <span>✓✓</span> Tandai Semua Sudah Dibaca
+            <CheckCheck className="h-4 w-4" aria-hidden="true" />
+            <span>Tandai Semua Sudah Dibaca</span>
           </button>
         )}
       </div>
@@ -80,7 +88,7 @@ export function NotificationList({
       {/* Daftar Notifikasi */}
       {filtered.length === 0 ? (
         <div className="card p-8 text-center text-muted">
-          <span className="text-3xl block mb-2">🔔</span>
+          <Bell className="mx-auto mb-2 h-10 w-10 text-muted/60" aria-hidden="true" />
           <p className="text-sm font-semibold text-foreground">
             {filter === "unread"
               ? "Tidak ada notifikasi yang belum dibaca."
@@ -102,13 +110,15 @@ export function NotificationList({
               }`}
             >
               <div className="flex items-start gap-3">
-                <span className="text-xl shrink-0 mt-0.5">
-                  {item.type === "success"
-                    ? "🏆"
-                    : item.type === "warning"
-                    ? "⚠️"
-                    : "ℹ️"}
-                </span>
+                <div className="shrink-0 mt-0.5">
+                  {item.type === "success" ? (
+                    <Trophy className="h-5 w-5 text-green-600 dark:text-green-400" aria-hidden="true" />
+                  ) : item.type === "warning" ? (
+                    <AlertTriangle className="h-5 w-5 text-amber-500" aria-hidden="true" />
+                  ) : (
+                    <Info className="h-5 w-5 text-accent" aria-hidden="true" />
+                  )}
+                </div>
                 <div>
                   <div className="flex items-center gap-2">
                     <h4 className="text-sm font-semibold text-foreground">

@@ -3,6 +3,7 @@
 // Halaman Error Boundaries Global Next.js App Router (Bahasa Indonesia)
 import { useEffect } from "react";
 import Link from "next/link";
+import { AlertTriangle } from "lucide-react";
 
 export default function GlobalError({
   error,
@@ -19,7 +20,7 @@ export default function GlobalError({
   return (
     <div className="flex min-h-screen flex-col items-center justify-center px-4 py-16 text-center bg-background text-foreground">
       <div className="card max-w-lg p-8 shadow-sm">
-        <span className="mb-4 inline-block text-5xl">⚠️</span>
+        <AlertTriangle className="mx-auto mb-4 h-14 w-14 text-amber-500" aria-hidden="true" />
         <h1 className="mb-2 text-2xl font-bold tracking-tight">Terjadi Kesalahan Tak Terduga</h1>
         <p className="mb-6 text-sm text-muted">
           Maaf, sistem mengalami kendala teknis saat memproses permintaan Anda. Silakan coba muat ulang atau kembali ke halaman utama.

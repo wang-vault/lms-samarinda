@@ -5,6 +5,7 @@
 
 import { useRef, useState } from "react";
 import { updateVideoProgressAction, markVideoWatchedAction } from "@/actions/videos";
+import { CheckCircle2 } from "lucide-react";
 
 /**
  * Pemutar video untuk siswa.
@@ -138,7 +139,14 @@ export function VideoPlayer({
           />
         </div>
         <span className="text-xs text-muted">
-          {watched ? "✅ Selesai ditonton" : `${Math.floor(percent)}% ditonton`}
+          {watched ? (
+            <span className="inline-flex items-center gap-1 font-medium text-green-600 dark:text-green-400">
+              <CheckCircle2 className="h-3.5 w-3.5" aria-hidden="true" />
+              <span>Selesai ditonton</span>
+            </span>
+          ) : (
+            `${Math.floor(percent)}% ditonton`
+          )}
         </span>
         {!watched && (
           <button

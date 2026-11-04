@@ -4,6 +4,7 @@ import { requireRole } from "@/lib/auth-helpers";
 import { PageHeader } from "@/components/layout/page-header";
 import { getForumCourses } from "@/lib/support-queries";
 import Link from "next/link";
+import { MessageSquare, BookOpen } from "lucide-react";
 
 export const metadata = {
   title: "Forum Diskusi · Instruktur",
@@ -23,7 +24,7 @@ export default async function InstrukturForumPage() {
 
       {courses.length === 0 ? (
         <div className="card p-8 text-center text-muted">
-          <span className="text-3xl block mb-2">💬</span>
+          <MessageSquare className="mx-auto mb-2 h-10 w-10 text-muted/60" aria-hidden="true" />
           <p className="text-sm font-semibold text-foreground">
             Belum ada kursus aktif.
           </p>
@@ -39,7 +40,9 @@ export default async function InstrukturForumPage() {
               className="card p-5 flex flex-col justify-between hover:border-accent transition-all group"
             >
               <div>
-                <span className="text-2xl block mb-2">📚</span>
+                <div className="mb-3 inline-flex h-9 w-9 items-center justify-center rounded-lg bg-accent-soft text-accent">
+                  <BookOpen className="h-5 w-5" aria-hidden="true" />
+                </div>
                 <h3 className="text-base font-bold text-foreground group-hover:text-accent transition-colors">
                   {course.title}
                 </h3>
