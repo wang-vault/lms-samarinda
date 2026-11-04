@@ -107,8 +107,8 @@ export async function POST(req: NextRequest) {
           const client = new Anthropic({
             apiKey,
             baseURL: process.env.ANTHROPIC_BASE_URL || undefined,
-            timeout: 5000,
-            maxRetries: 1,
+            timeout: 60000,
+            maxRetries: 2,
           });
           const model = process.env.ANTHROPIC_MODEL || "claude-opus-5-5";
           const systemPrompt = buildSystemPrompt(lmsContext, userName);
