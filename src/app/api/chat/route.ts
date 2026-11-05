@@ -120,15 +120,24 @@ export async function POST(req: NextRequest) {
             messages: sanitized,
           });
 
+          let emittedChars = 0;
+
           anthropicStream.on("text", (textDelta) => {
             // Bersihkan karakter non-Latin dari setiap potongan streaming
             const cleaned = textDelta.replace(nonLatinBlockRegex, "");
             if (cleaned) {
+              emittedChars += cleaned.length;
               sendEvent({ text: cleaned });
             }
           });
 
           await anthropicStream.finalMessage();
+
+          // Jika upstream selesai tanpa menghasilkan teks jawaban sama sekali (misal hanya thinking atau respons kosong)
+          if (emittedChars === 0) {
+            throw new Error("Upstream stream emitted zero text content");
+          }
+
           controller.enqueue(encoder.encode("data: [DONE]\n\n"));
           controller.close();
           return;
